@@ -162,22 +162,14 @@ he icon properties using Mapbox Maki icons replaced with leaflet code*/
             $.extend(feature.properties, INCIDENT_MARKER_PROPERTIES);
         });*/
         /*the following is the actual descision making process of assigning icons to a certain CSCategory*/
-        var actionMapping = {
-            'establish': 'g',
-            'rescind': 'r',
-            'revoke': 'r',
-            'extend': 'g',
-            'remove': 'r',
-            're-open': 'g',
-            'estabish': 'g',
-            'install': 'g',
-            'red zone': 'g',
-            'expand hours': 'g',
-            'recind': 'r',
-            'relocate': 'g'
+        var categoryMapping = {
+            'Energy/Fuel': 'energy',
+            'Food': 'food',
+            'Water': 'water',
+            'Medical': 'medical'
         }
         incidentLayer.setGeoJSON(incidentGeoJson).eachLayer(function (layer) {
-          var iconUrl = './gfx/img_markers_' + layer.feature.properties.category + '_' + actionMapping[layer.feature.properties.action.trim()] + '.png'
+          var iconUrl = './gfx/' + layer.feature.properties.category + '_' + categoryMapping[layer.feature.properties.category.trim()] + '.png'
           layer.setIcon(L.icon({
             iconUrl: iconUrl,
             iconSize: [40, 40],
@@ -197,11 +189,10 @@ he icon properties using Mapbox Maki icons replaced with leaflet code*/
     function _buildPopupContent(properties) {
         var newDate = properties.date
         var formattedDate = newDate.slice(5,7) + "/" + newDate.slice(8, 10) + "/" + newDate.slice(0,4)
-        var content = '<h1>Resolution ' + properties.resolution_numbers + ' ' + properties.resolution_letter + '</h1>'
-        content += '<p>' + formattedDate + '</p>'
-        content += '<p>' + properties.action + ' - ' + properties.type + ': ' + properties.description + '</p>'
-        content += '<p><a href="https://sfmta.xtreet.org/docs/sfmta/' + properties.pdf + '" target="_blank">Board meeting minutes (PDF)</a></p>'
-        content += '<p><a href="' + properties.video + '" target="_blank">Board meeting video</a></p>'
+        var content = '<h1>' + properties.category + '</h1>'
+        content += '<p>Date: ' + formattedDate + '</p>'
+        content += '<p>Category: ' + properties.category + '</p>'
+        content += '<p>Description: ' + properties.description + '</p>'
         return content
     }
 
