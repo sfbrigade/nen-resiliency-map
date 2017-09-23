@@ -1,6 +1,6 @@
 var incidentService = (function(window, $) {
 
-    var INCIDENTS_API_JSON_URL = resourceEndpointsModule.INCIDENTS_API_JSON_URL;
+    var INCIDENTS_API_JSON_URL = 'data.json';
 
     function _findMostRecentIncident(callback) {
         var query = "?$select=date"
