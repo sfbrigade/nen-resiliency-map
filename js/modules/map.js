@@ -169,7 +169,7 @@ he icon properties using Mapbox Maki icons replaced with leaflet code*/
             'Medical': 'medical'
         }
         incidentLayer.setGeoJSON(incidentGeoJson).eachLayer(function (layer) {
-          var iconUrl = './gfx/' + layer.feature.properties.category + '_' + categoryMapping[layer.feature.properties.category.trim()] + '.png'
+          var iconUrl = './gfx/'  + categoryMapping[layer.feature.properties.category.trim()] + '.png'
           layer.setIcon(L.icon({
             iconUrl: iconUrl,
             iconSize: [40, 40],
